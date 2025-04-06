@@ -1,0 +1,497 @@
+
+/* SEO-Friendly Breadcrumbs */
+.breadcrumbs {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Enhanced mobile-friendly breadcrumbs */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        white-space: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        padding-bottom: 5px;
+    }
+    
+    .breadcrumbs::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: #aaa;
+    margin: 0 5px;
+}
+
+/* FAQ Section Styles */
+.faq-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.faq-question {
+    padding: 15px 20px;
+    background-color: #f5f7fa;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: #e9ecef;
+}
+
+.faq-question::after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    transition: transform 0.3s;
+}
+
+.faq-question.active::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer-content {
+    padding: 0 20px;
+}
+
+.faq-answer.active {
+    padding: 20px;
+    max-height: 1000px;
+}
+
+/* Featured Snippet Optimization */
+.featured-snippet-candidate {
+    background-color: #f5f7fa;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px 20px;
+    margin: 15px 0 25px;
+    border-radius: 0 8px 8px 0;
+}
+
+.quick-answer {
+    font-weight: 500;
+    margin-bottom: 0;
+    color: #333;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+/* FAQ Footer */
+.faq-footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+}
+
+.faq-note {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Schema.org Visibility Helper Classes */
+.schema-content {
+    display: block;
+}
+
+.schema-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Structured Data Visual Indicators */
+article[itemscope],
+div[itemscope] {
+    position: relative;
+}
+
+/* Video Schema Styling */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    margin-bottom: 30px;
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+
+/* Voice Search Optimization Styles */
+[data-voice-target="question"] {
+    color: var(--primary-color);
+    position: relative;
+    margin-top: 30px;
+    font-weight: 600;
+}
+
+[data-voice-target="answer"] {
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+[data-voice-target="location"] {
+    font-weight: 500;
+}
+
+/* SEO-optimized CTA buttons */
+.seo-cta {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.seo-cta:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+.seo-cta:focus {
+    outline: 3px solid rgba(68, 115, 78, 0.5); /* Primary color with transparency */
+}
+
+/* Rich Snippet Preview */
+.rich-snippet-preview {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    max-width: 600px;
+    font-family: Arial, sans-serif;
+}
+
+.rich-snippet-preview .title {
+    color: #1a0dab;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rich-snippet-preview .url {
+    color: #006621;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.rich-snippet-preview .description {
+    color: #545454;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Featured Snippet Optimization */
+.featured-snippet-candidate {
+    background-color: #f9f9f9;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px 20px;
+    margin: 25px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.featured-snippet-candidate h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.featured-snippet-candidate ul,
+.featured-snippet-candidate ol {
+    margin-bottom: 0;
+    padding-left: 20px;
+}
+
+.featured-snippet-candidate li {
+    margin-bottom: 8px;
+}
+
+.featured-snippet-candidate li:last-child {
+    margin-bottom: 0;
+}
+
+/* Core Web Vitals Optimization */
+.lazy-load-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    line-height: 0;
+}
+
+.lazy-load-container img {
+    transition: opacity 0.3s;
+    opacity: 0;
+    width: 100%;
+    height: auto;
+}
+
+.lazy-load-container img.loaded {
+    opacity: 1;
+}
+
+.lazy-load-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lazy-load-placeholder:after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Semantic HTML5 style enhancements */
+article {
+    margin-bottom: 40px;
+}
+
+article header {
+    margin-bottom: 20px;
+}
+
+article footer {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+time {
+    color: #666;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+address {
+    font-style: normal;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+figure {
+    margin: 0 0 20px 0;
+}
+
+figcaption {
+    font-size: 0.85rem;
+    color: #666;
+    padding: 8px 0;
+    text-align: center;
+}
+
+mark {
+    background-color: rgba(255, 230, 0, 0.3);
+    padding: 2px 4px;
+}
+
+/* Accessibility Enhancements */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    clip-path: none;
+    color: #444;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+}
+
+/* Focus outline for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 3px solid rgba(68, 115, 78, 0.5);
+    outline-offset: 2px;
+}
+
+/* Skip links with enhanced visibility */
+.skip-link {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    color: #444;
+    font-weight: bold;
+    left: 5px;
+    padding: 10px;
+    position: absolute;
+    top: -100px;
+    transition: top 0.3s ease;
+    z-index: 999;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 5px;
+}
+
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.video-meta > div {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.video-meta i {
+    margin-right: 5px;
+}
+
+/* Review Schema Styles */
+.review-item {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-author {
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.review-date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Make skip links more accessible */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}

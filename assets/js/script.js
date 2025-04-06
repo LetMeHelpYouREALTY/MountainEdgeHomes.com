@@ -78,14 +78,14 @@ window.addEventListener('resize', setVhProperty);
 document.addEventListener('DOMContentLoaded', function() {
     // Cache frequently accessed DOM elements to reduce lookups
     const cachedElements = {};
-    
+
     function getElement(id) {
         if (!cachedElements[id]) {
             cachedElements[id] = document.getElementById(id);
         }
         return cachedElements[id];
     }
-    
+
     // Announcement banner close functionality
     const announcementBanner = getElement('announcement-banner');
     const closeBanner = getElement('close-banner');
@@ -349,4 +349,48 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize in collapsed state
         searchToggle.classList.add('collapsed');
     }
+
+    // Initialize testimonials slider
+    let testimonialIndex = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+
+    if (testimonials.length > 0) {
+        function showNextTestimonial() {
+            testimonials[testimonialIndex].style.display = 'none';
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            testimonials[testimonialIndex].style.display = 'block';
+        }
+
+        // Auto-advance testimonials every 8 seconds
+        setInterval(showNextTestimonial, 8000);
+    }
+
+    // Initialize FAQ accordion functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isActive = question.classList.contains('active');
+
+            // Close all FAQs
+            faqQuestions.forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+
+            // If the clicked FAQ wasn't active, open it
+            if (!isActive) {
+                question.classList.add('active');
+                answer.classList.add('active');
+            }
+
+            // Track FAQ interaction for analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'faq_interaction', {
+                    'faq_question': question.textContent.trim()
+                });
+            }
+        });
+    });
 });

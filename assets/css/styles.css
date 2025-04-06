@@ -267,12 +267,26 @@ nav ul li a.active {
     background-color: var(--accent-color);
     color: white;
     text-align: center;
-    padding: 15px 30px;
+    padding: 12px 30px;
     position: relative;
     z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.announcement-banner .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 900px;
+}
+
+.announcement-banner .banner-icon {
+    font-size: 1.2rem;
+    margin-right: 4px;
 }
 
 .announcement-banner p {
@@ -282,16 +296,26 @@ nav ul li a.active {
     letter-spacing: 0.3px;
 }
 
-.announcement-banner a {
-    color: white;
-    text-decoration: underline;
-    font-weight: bold;
-    margin-left: 10px;
-    transition: opacity 0.2s ease;
+.announcement-banner p strong {
+    font-weight: 700;
 }
 
-.announcement-banner a:hover {
-    opacity: 0.85;
+.announcement-banner .banner-cta {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 6px 15px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.announcement-banner .banner-cta:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .announcement-banner .close-banner {
@@ -313,6 +337,16 @@ nav ul li a.active {
 
 .announcement-banner .close-banner:hover {
     transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .announcement-banner {
+        padding: 12px 40px 12px 20px;
+    }
+    
+    .announcement-banner .banner-content {
+        justify-content: center;
+    }
 }
 
 /* Hero Section */
@@ -2073,9 +2107,57 @@ footer::before {
 
 .neighborhoods-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-top: 40px;
+}
+
+.neighborhood-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.neighborhood-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.neighborhood-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.neighborhood-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.neighborhood-card:hover .neighborhood-image img {
+    transform: scale(1.1);
+}
+
+.neighborhood-info {
+    background: linear-gradient(to right, #f8f8f8, #ffffff);
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.neighborhood-info h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.neighborhood-info p {
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    line-height: 1.5;
 }
 
 @media (max-width: 992px) {

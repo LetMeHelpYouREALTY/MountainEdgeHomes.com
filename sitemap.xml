@@ -1,94 +1,158 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://mountainedgehomes.com/index.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mountainedgehomes.com/es/index.html"/>
+    <image:image>
+      <image:loc>https://mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg</image:loc>
+      <image:title>Mountain's Edge Las Vegas Luxury Homes</image:title>
+      <image:caption>Panoramic view of Mountain's Edge community in Las Vegas with mountain backdrop</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg</video:thumbnail_loc>
+      <video:title>Mountain's Edge Las Vegas Community Tour</video:title>
+      <video:description>Take a virtual tour of the beautiful Mountain's Edge master-planned community in southwest Las Vegas.</video:description>
+      <video:content_loc>https://mountainedgehomes.com/assets/videos/mountains-edge-community-tour.mp4</video:content_loc>
+      <video:duration>222</video:duration>
+    </video:video>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/blog.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/blog.html"/>
+    <news:news>
+      <news:publication>
+        <news:name>Mountain Edge Homes Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2024-04-04</news:publication_date>
+      <news:title>Latest Real Estate Trends in Mountain's Edge</news:title>
+    </news:news>
+    <image:image>
+      <image:loc>https://mountainedgehomes.com/assets/images/blog-header.jpg</image:loc>
+      <image:title>Mountain Edge Homes Blog</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/home-value.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/home-value.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mountainedgehomes.com/es/home-value.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/our-team.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/our-team.html"/>
+    <image:image>
+      <image:loc>https://mountainedgehomes.com/assets/images/team.jpg</image:loc>
+      <image:title>Mountain Edge Homes Real Estate Team</image:title>
+      <image:caption>Our expert team of real estate professionals specializing in Mountain's Edge</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/testimonials.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/testimonials.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/property-details.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/property-details.html"/>
+    <image:image>
+      <image:loc>https://mountainedgehomes.com/assets/images/property1.jpg</image:loc>
+      <image:title>Luxury Home in Mountain's Edge</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-aspire.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-aspire.html"/>
+    <image:image>
+      <image:loc>https://mountainedgehomes.com/assets/images/neighborhood-aspire.jpg</image:loc>
+      <image:title>Aspire at Mountain's Edge</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-cascade.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-cascade.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-collina.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-collina.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-mesa-valla.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-mesa-valla.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-montelano.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-montelano.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-quintessa.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-quintessa.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-san-gabriel.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-san-gabriel.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/neighborhood-sierra-madre.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/neighborhood-sierra-madre.html"/>
   </url>
   <url>
     <loc>https://mountainedgehomes.com/sitemap.html</loc>
     <lastmod>2024-04-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/sitemap.html"/>
+  </url>
+  <url>
+    <loc>https://mountainedgehomes.com/faq.html</loc>
+    <lastmod>2024-04-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mountainedgehomes.com/faq.html"/>
   </url>
 </urlset>

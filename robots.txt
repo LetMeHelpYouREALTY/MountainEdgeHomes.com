@@ -1,0 +1,92 @@
+
+# robots.txt for https://mountainedgehomes.com/
+
+# Allow all user agents
+User-agent: *
+Allow: /
+
+# Sitemap locations
+Sitemap: https://mountainedgehomes.com/sitemap.xml
+Sitemap: https://mountainedgehomes.com/image-sitemap.xml
+Sitemap: https://mountainedgehomes.com/video-sitemap.xml
+
+# Block sensitive directories 
+Disallow: /attached_assets/
+Disallow: /.config/
+Disallow: /auto-push.js
+Disallow: /start-auto-push.sh
+Disallow: /stop-auto-push.sh
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /temp/
+Disallow: /wp-admin/
+Disallow: /_private/
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*?*
+
+# Set crawl priorities for different bots
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /attached_assets/
+
+# Google images
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Google mobile
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Google Ads bot
+User-agent: AdsBot-Google
+Allow: /
+
+# Bing
+User-agent: bingbot
+Crawl-delay: 2
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Crawl-delay: 2
+Allow: /
+
+# Yahoo
+User-agent: Slurp
+Crawl-delay: 2
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Crawl-delay: 3
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Crawl-delay: 2
+Allow: /
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# Add noindex directives for specific files (alternative to X-Robots-Tag HTTP headers)
+# Note: Modern best practice is to use X-Robots-Tag HTTP headers for this, but including here for completeness
+# Disallow: /duplicate-content.html
+# Disallow: /temporary-page.html
+# Disallow: /legacy-content.html
