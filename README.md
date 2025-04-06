@@ -1,4 +1,3 @@
-
 # Mountain Edge Homes Website
 
 Welcome to the Mountain Edge Homes website repository! This wiki provides information about the project structure, key features, and how to contribute.
@@ -38,6 +37,19 @@ npm start
 ```
 
 The site will be available at http://localhost:3000
+
+## Automatic Git Push from Replit
+
+This project includes an automatic Git push system that synchronizes changes from Replit to GitHub:
+
+- **Auto-Push Service**: When running in Replit, changes are automatically committed and pushed to GitHub
+- **Frequency**: Changes are checked every 2 minutes and pushed at most every 5 minutes
+- **Service Control**: 
+  - To start: Run `bash start-auto-push.sh`
+  - To stop: Run `bash stop-auto-push.sh`
+- **Log File**: Auto-push activity is logged to `auto-push.log`
+
+The service starts automatically when you run the project in Replit, ensuring all changes are continuously backed up to GitHub without manual intervention.
 
 ## Deployment
 

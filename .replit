@@ -3,16 +3,25 @@ modules = ["nodejs-20"]
 channel = "stable-24_05"
 
 [workflows]
-runButton = "Run"
+runButton = "Run Server & Auto-Push"
 
 [[workflows.workflow]]
-name = "Run"
+name = "Run Server & Auto-Push"
 author = 22930014
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm install && npm start"
+args = "bash start-auto-push.sh && npm install && npm start"
+
+[[workflows.workflow]]
+name = "Start Auto-Push"
+author = 22930014
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash start-auto-push.sh"
 
 [[ports]]
 localPort = 3000

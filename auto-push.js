@@ -1,16 +1,18 @@
-
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+// Detect if running in Replit
+const isReplit = process.env.REPL_ID && process.env.REPL_SLUG;
+
 // Configuration
 const config = {
   // How often to check for changes (in milliseconds)
-  checkInterval: 60000, // 1 minute
+  checkInterval: isReplit ? 120000 : 60000, // 2 minutes on Replit, 1 minute locally
   
   // Minimum time between pushes (in milliseconds)
-  minPushInterval: 300000, // 5 minutes
+  minPushInterval: isReplit ? 300000 : 300000, // 5 minutes
   
   // Branch to push to
   branch: 'main',
@@ -19,11 +21,13 @@ const config = {
   ignorePatterns: [
     '.git',
     'node_modules',
-    'auto-push.js.lock'
+    'auto-push.js.lock',
+    'auto-push.log',
+    'auto-push.pid'
   ],
   
   // Commit message template (supports dynamic values)
-  commitMessageTemplate: 'Auto-update: {{changedFiles}} | {{timestamp}}',
+  commitMessageTemplate: 'Auto-update via Replit: {{changedFiles}} | {{timestamp}}',
   
   // Max number of files to list in commit message
   maxFilesToList: 3,
@@ -32,7 +36,7 @@ const config = {
   enableColors: true,
   
   // Log level: 0 = minimal, 1 = normal, 2 = verbose
-  logLevel: 1
+  logLevel: isReplit ? 1 : 2
 };
 
 // Color codes for console output
@@ -71,6 +75,30 @@ function log(message, level = 1, color = null) {
     console.log(`${colors[color]}${prefix} ${message}${colors.reset}`);
   } else {
     console.log(`${prefix} ${message}`);
+  }
+}
+
+// Replit-specific setup
+function setupReplit() {
+  if (!isReplit) return false;
+  
+  log('Detected Replit environment. Applying Replit-specific configurations...', 0, 'magenta');
+  
+  try {
+    // Ensure Git is configured properly for Replit
+    if (!execSync('git config --get user.name', { stdio: 'pipe' }).toString().trim()) {
+      execSync('git config --global user.name "Mountain Edge Homes"');
+      execSync('git config --global user.email "auto-push@mountainedgehomes.com"');
+      log('Configured Git user for Replit', 1, 'green');
+    }
+    
+    // Make sure we're using credential.helper store
+    execSync('git config --global credential.helper store');
+    
+    return true;
+  } catch (error) {
+    log(`Failed to configure Replit: ${error.message}`, 0, 'red');
+    return false;
   }
 }
 
@@ -330,8 +358,20 @@ process.on('SIGTERM', () => {
 
 // Start the service
 showStartupBanner();
+
+// Initialize based on environment
+if (isReplit) {
+  log('Running in Replit environment', 0, 'blue');
+  setupReplit();
+} else {
+  log('Running in standard environment', 0, 'blue');
+}
+
 createLock();
 fileHashes = loadCurrentState();
 monitorAndPush();
 
 log(`Auto-push service is now running with PID ${process.pid}`, 0, 'green');
+if (isReplit) {
+  log(`Changes will be automatically pushed to GitHub from Replit`, 0, 'green');
+}

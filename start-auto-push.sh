@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Colorful output
@@ -27,6 +26,16 @@ if ! git config --get user.name > /dev/null || ! git config --get user.email > /
     git config --global user.email "auto-push@mountainedgehomes.com"
     
     echo -e "${GREEN}Git user configured successfully!${NC}"
+fi
+
+# Set up GitHub credentials for Replit environment
+if [[ -n "$REPL_SLUG" && -n "$REPL_OWNER" ]]; then
+    echo -e "${BLUE}Detected Replit environment. Setting up credentials...${NC}"
+    
+    # Configure Git to use Replit authentication if available
+    git config --global credential.helper store
+    
+    echo -e "${GREEN}Replit Git credentials configured!${NC}"
 fi
 
 # Check if the repository has uncommitted changes
