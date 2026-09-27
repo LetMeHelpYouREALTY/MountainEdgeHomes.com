@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/image-optimization.css">
     <link rel="stylesheet" href="assets/css/calendly-overrides.css">
+    <link rel="stylesheet" href="assets/css/amenity-map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
     <link rel="preconnect" href="https://em.realscout.com" crossorigin>
@@ -111,6 +112,7 @@
                         <ul class="nav-dropdown-menu" id="resources-submenu" role="menu" aria-labelledby="resources-btn">
                             <li role="none"><a href="https://calendly.com/drjanduffy/appointment?hide_event_type_details=1&amp;hide_gdpr_banner=1" class="calendly-popup-trigger" role="menuitem">Book with Calendly</a></li>
                             <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
+                            <li role="none"><a href="amenities.html" role="menuitem">Nearby amenities</a></li>
                             <li role="none"><a href="faq.html" role="menuitem">FAQ</a></li>
                             <li role="none"><a href="testimonials.html" role="menuitem">Testimonials</a></li>
                             <li role="none"><a href="market-reports.html" role="menuitem">Market reports</a></li>
@@ -169,7 +171,7 @@
                 <p>Mountain's Edge combines newer construction, desert landscaping, and large parks such as Exploration Peak Park. Residents often commute to employment centers across the valley; the Las Vegas Strip and Harry Reid International Airport are reachable by car in typical Southwest Las Vegas drive times, depending on traffic.</p>
 
                 <h2>Where should I explore next?</h2>
-                <p>Browse our <a href="neighborhoods.html">Mountain's Edge neighborhoods hub</a>, search <a href="homes-for-sale.html">homes for sale</a>, or read the <a href="buyers.html">Southwest Las Vegas buyer guide</a>.</p>
+                <p>Browse our <a href="neighborhoods.html">Mountain's Edge neighborhoods hub</a>, explore <a href="amenities.html">nearby amenities</a>, search <a href="homes-for-sale.html">homes for sale</a>, or read the <a href="buyers.html">Southwest Las Vegas buyer guide</a>.</p>
             </div>
 
             <h2 class="section-title">Mountain's Edge Las Vegas real estate experts</h2>
@@ -205,32 +207,12 @@
         </div>
     </section>
 
-    <section id="map-section" class="map-section">
+    <section id="map-section" class="amenity-map-section" aria-labelledby="community-amenity-map-heading">
         <div class="container">
-            <h2 class="section-title">Where is Mountain's Edge on the map?</h2>
-            <div class="map-content">
-                <div id="mountain-edge-map" class="interactive-map">
-                    <div id="map-error" style="display: none; text-align: center; padding: 20px;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 32px; color: #e74c3c; margin-bottom: 15px;"></i>
-                        <h3>Map Loading Error</h3>
-                        <p>We're having trouble loading the map. Please try again later.</p>
-                        <div style="margin-top: 15px; font-size: 14px; color: #666;">
-                            <p><strong>Mountain Edge Location:</strong> 36.0051°N, 115.2552°W</p>
-                            <p>A master-planned community in southwest Las Vegas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="map-controls">
-                    <h3>Discover the area</h3>
-                    <p>Use the interactive map to explore landmarks, neighborhoods, and amenities near Mountain's Edge.</p>
-                    <div class="map-buttons">
-                        <button type="button" class="map-btn" data-poi="schools">Schools</button>
-                        <button type="button" class="map-btn" data-poi="parks">Parks</button>
-                        <button type="button" class="map-btn" data-poi="shopping">Shopping</button>
-                        <button type="button" class="map-btn" data-poi="restaurants">Restaurants</button>
-                    </div>
-                </div>
-            </div>
+            <h2 class="section-title" id="community-amenity-map-heading">What's nearby in Mountain's Edge?</h2>
+            <p class="section-subtitle">Filter restaurants, parks, schools, grocery, and more around southwest Las Vegas 89178.</p>
+            <div data-amenity-map data-amenity-map-height="480"></div>
+            <p class="amenity-map-cta"><a href="amenities.html" class="btn btn-secondary">Full nearby amenities guide</a></p>
         </div>
     </section>
 
@@ -309,14 +291,13 @@
     </footer>
 
 
-    <!-- Maps key is public in HTML; restrict by HTTP referrer in Google Cloud Console for production. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt84u_m6IGyrNZ9Eyc2W0fAIx6yD3peTo&callback=initMapsCallback" async defer></script>
     <script src="assets/js/site-contact.js" defer></script>
     <script src="assets/js/local-business-schema.js" defer></script>
     <script src="assets/js/calendly-embed.js" defer></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/image-optimization.js"></script>
-    <script src="assets/js/map.js" defer></script>
-    <script src="assets/js/map-test.js" defer></script>
+    <script src="assets/js/community-map-config.js" defer></script>
+    <script src="assets/js/maps-public-env.js" defer></script>
+    <script src="assets/js/amenity-map.js" defer></script>
 </body>
 </html>

@@ -25,8 +25,9 @@ Mountain Edge Homes is a real estate website specializing in properties in the M
 
 ## Environment Setup
 
-The website requires the following environment variables:
-- `GOOGLE_MAPS_API_KEY` - API key for Google Maps integration
+The website requires the following environment variables (set in Vercel; injected at build):
+- `PUBLIC_GOOGLE_MAPS_API_KEY` - Google Maps JavaScript API key (also accepts `GOOGLE_MAPS_API_KEY`)
+- `PUBLIC_GOOGLE_MAPS_MAP_ID` - Optional Advanced Markers map ID
 
 ## Local Development
 
