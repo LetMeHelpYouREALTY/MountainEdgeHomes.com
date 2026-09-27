@@ -25,6 +25,19 @@
       values[key] = value;
     });
 
+    if (!values.name && form.querySelector('#name')) {
+      values.name = form.querySelector('#name').value;
+    }
+    if (!values.email && form.querySelector('#email')) {
+      values.email = form.querySelector('#email').value;
+    }
+    if (!values.phone && form.querySelector('#phone')) {
+      values.phone = form.querySelector('#phone').value;
+    }
+    if (!values.message && form.querySelector('#message')) {
+      values.message = form.querySelector('#message').value;
+    }
+
     const name =
       values.name ||
       values.fullName ||
