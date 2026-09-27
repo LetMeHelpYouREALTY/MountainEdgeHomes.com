@@ -168,7 +168,7 @@ function renderPropertyDetails(property) {
                         </div>
                     </div>
                     
-                    <form class="contact-form">
+                    <form class="contact-form" data-lead="true" data-lead-type="Property Inquiry" data-form-name="Property inquiry">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" required>
@@ -194,14 +194,8 @@ function renderPropertyDetails(property) {
     
     propertyContent.innerHTML = detailsHTML;
     
-    // Add event listener for contact form
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your inquiry. Our agent will contact you shortly!');
-            contactForm.reset();
-        });
+    if (window.MountainEdgeLeadForm && typeof window.MountainEdgeLeadForm.bindLeadForms === 'function') {
+        window.MountainEdgeLeadForm.bindLeadForms();
     }
 }
 

@@ -2,11 +2,19 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/lead.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/api/lead",
+      "dest": "/api/lead.js"
+    },
     {
       "src": "/(.*)",
       "dest": "/$1"
