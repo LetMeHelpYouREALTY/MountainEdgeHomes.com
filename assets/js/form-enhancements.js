@@ -127,10 +127,15 @@ function setupFormSubmissions() {
     const forms = document.querySelectorAll('.enhanced-form');
     
     forms.forEach(form => {
+        if (
+            form.matches('[data-fub="true"], [data-lead="true"], .contact-form') ||
+            form.id === 'login-form' ||
+            form.id === 'request-form'
+        ) {
+            return;
+        }
+
         form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate all required inputs
             const requiredInputs = form.querySelectorAll('[required]');
             let formIsValid = true;
             
@@ -140,28 +145,8 @@ function setupFormSubmissions() {
                 }
             });
             
-            if (formIsValid) {
-                // Add loading state to button
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalBtnText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                submitBtn.disabled = true;
-                
-                // Here you would normally send the form data to your server
-                // For this example, we'll simulate a successful submission
-                setTimeout(() => {
-                    // Show success message
-                    showFormMessage(form, 'success', 'Thank you! Your message has been sent successfully.');
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Restore button
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalBtnText;
-                        submitBtn.disabled = false;
-                    }, 1000);
-                }, 1500);
+            if (!formIsValid) {
+                e.preventDefault();
             }
         });
     });

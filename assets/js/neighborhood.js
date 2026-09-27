@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Form submission handler is now in followupboss.js
+    // Lead forms use assets/js/lead-form.js → POST /api/lead
 
     // Smooth scroll for CTA buttons
     const ctaButtons = document.querySelectorAll('.cta-button, .secondary-cta');

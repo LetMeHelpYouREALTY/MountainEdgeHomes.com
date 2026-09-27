@@ -168,22 +168,22 @@ function renderPropertyDetails(property) {
                         </div>
                     </div>
                     
-                    <form class="contact-form">
+                    <form class="contact-form" data-lead="true" data-lead-type="Property Inquiry" data-form-name="Property inquiry">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" required>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" required>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Your Phone</label>
-                            <input type="tel" id="phone">
+                            <input type="tel" id="phone" name="phone">
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" rows="4" required>I'm interested in learning more about this property.</textarea>
+                            <textarea id="message" name="message" rows="4" required>I'm interested in learning more about this property.</textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
                     </form>
@@ -194,14 +194,8 @@ function renderPropertyDetails(property) {
     
     propertyContent.innerHTML = detailsHTML;
     
-    // Add event listener for contact form
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your inquiry. Our agent will contact you shortly!');
-            contactForm.reset();
-        });
+    if (window.MountainEdgeLeadForm && typeof window.MountainEdgeLeadForm.bindLeadForms === 'function') {
+        window.MountainEdgeLeadForm.bindLeadForms();
     }
 }
 

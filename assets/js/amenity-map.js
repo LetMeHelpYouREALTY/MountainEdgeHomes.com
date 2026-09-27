@@ -1,12 +1,20 @@
 /**
  * Reusable hyperlocal amenity map for Mountain's Edge (static HTML site).
- * Lazy-loads Google Maps; uses Places (New) searchNearby when available, else legacy nearbySearch.
+ * Lazy-loads Google Maps; Places (New) searchNearby with per-category session cache.
  */
 (function () {
   'use strict';
 
-  var loadedScript = false;
-  var loadingScript = false;
+  var mapsReady = null;
+  var mapsAuthFailed = false;
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('gmaps:auth-failure', function () {
+      mapsAuthFailed = true;
+    });
+  }
+
+  var categorySearchCache = new Map();
 
   function getConfig() {
     return window.MountainEdgeCommunityMapConfig || null;
@@ -47,6 +55,75 @@
       .replace(/"/g, '&quot;');
   }
 
+  function placeDisplayName(place) {
+    var name = place.displayName || place.name || 'Place';
+    if (name && typeof name === 'object' && name.text) {
+      return name.text;
+    }
+    return String(name);
+  }
+
+  function loadGoogleMaps(apiKey) {
+    if (typeof window === 'undefined') {
+      return Promise.reject(new Error('ssr'));
+    }
+    if (window.google && window.google.maps && window.google.maps.importLibrary) {
+      return Promise.resolve();
+    }
+    if (mapsReady) return mapsReady;
+    mapsReady = new Promise(function (resolve, reject) {
+      var cb = '__gmapsReadyMountainEdge';
+      window[cb] = function () {
+        resolve();
+      };
+      window.gm_authFailure = function () {
+        window.dispatchEvent(new Event('gmaps:auth-failure'));
+        mapsReady = null;
+        reject(new Error('gm_authFailure'));
+      };
+      var script = document.createElement('script');
+      script.src =
+        'https://maps.googleapis.com/maps/api/js?key=' +
+        encodeURIComponent(apiKey) +
+        '&v=weekly&loading=async&callback=' +
+        cb;
+      script.async = true;
+      script.onerror = function () {
+        mapsReady = null;
+        reject(new Error('maps script failed'));
+      };
+      document.head.appendChild(script);
+    });
+    return mapsReady;
+  }
+
+  function searchCategoryPlaces(center, categoryId, types, radiusMeters) {
+    var cached = categorySearchCache.get(categoryId);
+    if (cached) return cached;
+
+    var promise = (async function () {
+      var lib = await google.maps.importLibrary('places');
+      var Place = lib.Place;
+      var response = await Place.searchNearby({
+        fields: ['displayName', 'location', 'formattedAddress', 'googleMapsURI'],
+        locationRestriction: {
+          center: center,
+          radius: radiusMeters,
+        },
+        includedPrimaryTypes: types,
+        maxResultCount: 10,
+        rankPreference: 'POPULARITY',
+      });
+      return response.places || [];
+    })();
+
+    promise.catch(function () {
+      categorySearchCache.delete(categoryId);
+    });
+    categorySearchCache.set(categoryId, promise);
+    return promise;
+  }
+
   function buildStaticListHtml(places, categoryKey) {
     var filtered = places.filter(function (p) {
       return !categoryKey || p.category === categoryKey;
@@ -56,13 +133,11 @@
     }
     var items = filtered
       .map(function (p) {
-        return (
-          '<li><strong>' +
-          escapeHtml(p.name) +
-          '</strong> — ' +
-          escapeHtml(p.address) +
-          '</li>'
-        );
+        var line = '<strong>' + escapeHtml(p.name) + '</strong>';
+        if (p.address) {
+          line += ' — ' + escapeHtml(p.address);
+        }
+        return '<li>' + line + '</li>';
       })
       .join('');
     return (
@@ -87,47 +162,8 @@
     var status = root.querySelector('.amenity-map-status');
     if (status) {
       status.textContent =
-        'Interactive amenities load when a Google Maps API key is configured. Showing map embed and curated local places.';
+        'Showing a map embed and curated local places.';
     }
-  }
-
-  function loadGoogleMaps(apiKey, callback) {
-    if (window.google && window.google.maps) {
-      callback();
-      return;
-    }
-    if (loadedScript) {
-      var wait = setInterval(function () {
-        if (window.google && window.google.maps) {
-          clearInterval(wait);
-          callback();
-        }
-      }, 100);
-      return;
-    }
-    if (loadingScript) {
-      document.addEventListener('mountainedge-maps-ready', callback, { once: true });
-      return;
-    }
-    loadingScript = true;
-    var script = document.createElement('script');
-    script.src =
-      'https://maps.googleapis.com/maps/api/js?key=' +
-      encodeURIComponent(apiKey) +
-      '&loading=async&libraries=places&callback=mountainEdgeAmenityMapsBoot';
-    script.async = true;
-    script.defer = true;
-    script.onerror = function () {
-      loadingScript = false;
-      document.dispatchEvent(new CustomEvent('mountainedge-maps-failed'));
-    };
-    window.mountainEdgeAmenityMapsBoot = function () {
-      loadedScript = true;
-      loadingScript = false;
-      document.dispatchEvent(new CustomEvent('mountainedge-maps-ready'));
-      callback();
-    };
-    document.head.appendChild(script);
   }
 
   function AmenityMapInstance(root) {
@@ -138,6 +174,7 @@
     this.markers = [];
     this.map = null;
     this.infoWindow = null;
+    this.fallbackMode = false;
     this.activeCategory =
       this.config.categoryOrder && this.config.categoryOrder[0]
         ? this.config.categoryOrder[0]
@@ -147,6 +184,7 @@
       root.getAttribute('data-amenity-map-height') ||
       (this.compact ? '420' : '480');
     root.style.setProperty('--amenity-map-height', this.height + 'px');
+    this._onAuthFailure = null;
   }
 
   AmenityMapInstance.prototype.buildChrome = function () {
@@ -189,25 +227,64 @@
     });
   };
 
+  AmenityMapInstance.prototype.enterFallback = function () {
+    if (this.fallbackMode) return;
+    this.fallbackMode = true;
+    this.clearMarkers();
+    this.map = null;
+    renderFallback(this.root, this.center, this.places, this.activeCategory);
+  };
+
   AmenityMapInstance.prototype.setCategory = function (key) {
     this.activeCategory = key;
     this.root.querySelectorAll('.amenity-map-filter').forEach(function (btn) {
       var active = btn.getAttribute('data-category') === key;
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
+    if (this.fallbackMode || mapsAuthFailed) {
+      renderFallback(this.root, this.center, this.places, key);
+      return;
+    }
     if (this.map) {
       this.searchCategory(key);
     } else {
-      renderFallback(this.root, this.center, this.places, key);
+      var listEl = this.root.querySelector('.amenity-map-static-list');
+      if (listEl) {
+        listEl.innerHTML = buildStaticListHtml(this.places, key);
+      }
     }
   };
 
   AmenityMapInstance.prototype.clearMarkers = function () {
     this.markers.forEach(function (m) {
       if (m.setMap) m.setMap(null);
-      if (m.map) m.map = null;
+      if (m.map !== undefined) m.map = null;
     });
     this.markers = [];
+  };
+
+  AmenityMapInstance.prototype.openInfo = function (name, address, position) {
+    var container = document.createElement('div');
+    container.className = 'amenity-map-info-window';
+    var heading = document.createElement('h4');
+    heading.textContent = name;
+    container.appendChild(heading);
+    if (address) {
+      var addr = document.createElement('p');
+      addr.textContent = address;
+      container.appendChild(addr);
+    }
+    var linkWrap = document.createElement('p');
+    var link = document.createElement('a');
+    link.href = directionsUrl(position.lat, position.lng, name);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'Directions';
+    linkWrap.appendChild(link);
+    container.appendChild(linkWrap);
+    this.infoWindow.setContent(container);
+    this.infoWindow.setPosition(position);
+    this.infoWindow.open(this.map);
   };
 
   AmenityMapInstance.prototype.addCommunityMarker = function () {
@@ -230,7 +307,7 @@
         content: pin,
       });
       adv.addListener('click', function () {
-        self.openInfo(title, cfg.city + ' ' + cfg.postalCode, null, position);
+        self.openInfo(title, cfg.city + ' ' + cfg.postalCode, position);
       });
       this.markers.push(adv);
       return;
@@ -246,48 +323,21 @@
       self.openInfo(
         title,
         'Master-planned community in southwest ' + cfg.city + ', ' + cfg.state,
-        null,
         position
       );
     });
     this.markers.push(marker);
   };
 
-  AmenityMapInstance.prototype.openInfo = function (name, address, rating, position) {
-    var html =
-      '<div class="amenity-map-info-window"><h4>' +
-      escapeHtml(name) +
-      '</h4>';
-    if (rating) {
-      html += '<p>Rating: ' + escapeHtml(String(rating)) + '</p>';
-    }
-    if (address) {
-      html += '<p>' + escapeHtml(address) + '</p>';
-    }
-    html +=
-      '<p><a href="' +
-      directionsUrl(position.lat, position.lng, name) +
-      '" target="_blank" rel="noopener noreferrer">Directions</a></p></div>';
-    this.infoWindow.setContent(html);
-    this.infoWindow.setPosition(position);
-    this.infoWindow.open(this.map);
-  };
-
   AmenityMapInstance.prototype.addPlaceMarker = function (place) {
     var self = this;
-    var name = place.displayName || place.name || 'Place';
-    if (name && typeof name === 'object' && name.text) {
-      name = name.text;
-    }
-    var loc = place.location || place.geometry?.location;
+    var name = placeDisplayName(place);
+    var loc = place.location;
+    if (!loc) return;
     var lat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
     var lng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
     var position = { lat: lat, lng: lng };
-    var address =
-      place.formattedAddress ||
-      place.vicinity ||
-      (place.formatted_address || '');
-    var rating = place.rating;
+    var address = place.formattedAddress || '';
 
     var marker = new google.maps.Marker({
       map: this.map,
@@ -295,7 +345,7 @@
       title: name,
     });
     marker.addListener('click', function () {
-      self.openInfo(name, address, rating, position);
+      self.openInfo(name, address, position);
     });
     this.markers.push(marker);
   };
@@ -313,7 +363,7 @@
           title: p.name,
         });
         marker.addListener('click', function () {
-          self.openInfo(p.name, p.address, null, { lat: p.lat, lng: p.lng });
+          self.openInfo(p.name, p.address || '', { lat: p.lat, lng: p.lng });
         });
         self.markers.push(marker);
       });
@@ -322,7 +372,7 @@
   AmenityMapInstance.prototype.searchCategory = function (key) {
     var self = this;
     var cat = this.config.categories[key];
-    if (!cat) return;
+    if (!cat || !this.map) return;
 
     this.clearMarkers();
     this.addCommunityMarker();
@@ -333,99 +383,47 @@
     var listEl = this.root.querySelector('.amenity-map-static-list');
     if (listEl && !this.compact) {
       listEl.innerHTML = buildStaticListHtml(this.places, key);
+      listEl.hidden = false;
     }
 
-    function onResults(count) {
-      if (status) {
-        status.textContent =
-          count > 0
-            ? 'Showing ' + count + ' ' + cat.label.toLowerCase() + ' near ' + self.config.communityName + '.'
-            : 'No results for this filter; showing curated local places instead.';
-      }
-      if (count === 0) {
-        self.addCuratedMarkers(key);
-      }
-    }
+    var radius = this.config.searchRadiusMeters || 5000;
 
-    function runNewPlacesSearch(PlaceCtor) {
-      var center = new google.maps.LatLng(self.center.lat, self.center.lng);
-      var request = {
-        fields: ['displayName', 'location', 'formattedAddress', 'rating'],
-        locationRestriction: {
-          center: center,
-          radius: self.config.searchRadiusMeters || 8000,
-        },
-        includedPrimaryTypes: cat.primaryTypes,
-        maxResultCount: 15,
-      };
-      PlaceCtor.searchNearby(request)
-        .then(function (response) {
-          var places = response.places || [];
-          places.forEach(function (pl) {
-            self.addPlaceMarker({
-              displayName: pl.displayName,
-              location: pl.location,
-              formattedAddress: pl.formattedAddress,
-              rating: pl.rating,
-            });
-          });
-          onResults(places.length);
-        })
-        .catch(function () {
-          self.legacyNearbySearch(cat, onResults);
+    searchCategoryPlaces(this.center, key, cat.primaryTypes, radius)
+      .then(function (places) {
+        if (self.fallbackMode || mapsAuthFailed) return;
+        places.forEach(function (pl) {
+          self.addPlaceMarker(pl);
         });
-    }
-
-    if (google.maps.importLibrary) {
-      google.maps
-        .importLibrary('places')
-        .then(function (lib) {
-          if (lib.Place && lib.Place.searchNearby) {
-            runNewPlacesSearch(lib.Place);
-          } else {
-            self.legacyNearbySearch(cat, onResults);
-          }
-        })
-        .catch(function () {
-          self.legacyNearbySearch(cat, onResults);
-        });
-      return;
-    }
-
-    if (google.maps.places && google.maps.places.Place && google.maps.places.Place.searchNearby) {
-      runNewPlacesSearch(google.maps.places.Place);
-      return;
-    }
-
-    this.legacyNearbySearch(cat, onResults);
-  };
-
-  AmenityMapInstance.prototype.legacyNearbySearch = function (cat, onResults) {
-    var self = this;
-    var service = new google.maps.places.PlacesService(this.map);
-    service.nearbySearch(
-      {
-        location: this.center,
-        radius: this.config.searchRadiusMeters || 8000,
-        type: cat.legacyType,
-      },
-      function (results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-          results.slice(0, 15).forEach(function (r) {
-            self.addPlaceMarker({
-              name: r.name,
-              geometry: r.geometry,
-              vicinity: r.vicinity,
-              rating: r.rating,
-            });
-          });
-          onResults(results.length);
-        } else {
-          self.addCuratedMarkers(self.activeCategory);
-          onResults(0);
+        if (status) {
+          status.textContent =
+            places.length > 0
+              ? 'Showing ' +
+                places.length +
+                ' ' +
+                cat.label.toLowerCase() +
+                ' near ' +
+                self.config.communityName +
+                '.'
+              : 'No live results for this filter; showing curated local places.';
         }
-      }
-    );
+        if (places.length === 0) {
+          self.addCuratedMarkers(key);
+        }
+      })
+      .catch(function () {
+        if (self.fallbackMode || mapsAuthFailed) return;
+        self.addCuratedMarkers(key);
+        if (listEl) {
+          listEl.innerHTML = buildStaticListHtml(self.places, key);
+          listEl.hidden = false;
+        }
+        if (status) {
+          status.textContent =
+            'Live place search unavailable; showing curated local places for ' +
+            cat.label.toLowerCase() +
+            '.';
+        }
+      });
   };
 
   AmenityMapInstance.prototype.initInteractive = function () {
@@ -459,27 +457,50 @@
 
   AmenityMapInstance.prototype.start = function () {
     this.buildChrome();
-    var apiKey = getApiKey();
-    if (!apiKey) {
-      renderFallback(this.root, this.center, this.places, this.activeCategory);
+    var self = this;
+
+    this._onAuthFailure = function () {
+      self.enterFallback();
+    };
+    window.addEventListener('gmaps:auth-failure', this._onAuthFailure);
+
+    if (mapsAuthFailed) {
+      this.enterFallback();
       this.setCategory(this.activeCategory);
       return;
     }
-    var self = this;
-    loadGoogleMaps(apiKey, function () {
-      try {
-        self.initInteractive();
-      } catch (err) {
-        renderFallback(self.root, self.center, self.places, self.activeCategory);
-      }
-    });
-    document.addEventListener(
-      'mountainedge-maps-failed',
-      function () {
-        renderFallback(self.root, self.center, self.places, self.activeCategory);
-      },
-      { once: true }
-    );
+
+    var apiKey = getApiKey();
+    if (!apiKey) {
+      this.enterFallback();
+      this.setCategory(this.activeCategory);
+      return;
+    }
+
+    loadGoogleMaps(apiKey)
+      .then(function () {
+        if (mapsAuthFailed) {
+          self.enterFallback();
+          self.setCategory(self.activeCategory);
+          return;
+        }
+        try {
+          self.initInteractive();
+        } catch (err) {
+          self.enterFallback();
+          self.setCategory(self.activeCategory);
+        }
+      })
+      .catch(function () {
+        self.enterFallback();
+        self.setCategory(self.activeCategory);
+      });
+  };
+
+  AmenityMapInstance.prototype.destroy = function () {
+    if (this._onAuthFailure) {
+      window.removeEventListener('gmaps:auth-failure', this._onAuthFailure);
+    }
   };
 
   function observeAndInit() {
