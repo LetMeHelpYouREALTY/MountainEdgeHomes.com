@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="assets/css/image-accessibility.css">
     <link rel="stylesheet" href="assets/css/form-enhancements.css">
     <link rel="stylesheet" href="assets/css/calendly-overrides.css">
+    <link rel="stylesheet" href="assets/css/amenity-map.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
     <style>
@@ -274,6 +275,15 @@ realscout-simple-search {
         </div>
     </section>
 
+    <section id="whats-nearby" class="amenity-map-section" aria-labelledby="hfs-amenity-map-heading">
+        <div class="container">
+            <h2 class="section-title" id="hfs-amenity-map-heading">What's near your next Mountain's Edge home?</h2>
+            <p class="section-subtitle">Preview grocery, parks, schools, and dining around 89178 while you search listings.</p>
+            <div data-amenity-map data-amenity-map-compact="true" data-amenity-map-height="380"></div>
+            <p class="amenity-map-cta"><a href="amenities.html" class="btn btn-secondary">Nearby amenities guide</a></p>
+        </div>
+    </section>
+
     
     <!-- Footer -->
     <footer>
@@ -356,5 +366,8 @@ realscout-simple-search {
     <script src="assets/js/image-optimization.js"></script>
     <script src="assets/js/properties.js" defer></script>
     <script src="assets/js/form-enhancements.js" defer></script>
+    <script src="assets/js/community-map-config.js" defer></script>
+    <script src="assets/js/maps-public-env.js" defer></script>
+    <script src="assets/js/amenity-map.js" defer></script>
 </body>
 </html>
