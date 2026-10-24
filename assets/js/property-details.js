@@ -153,7 +153,7 @@ function renderPropertyDetails(property) {
                         </div>
                         <div class="agent-details">
                             <h4>Dr. Jan Duffy</h4>
-                            <p>Mountain Edge Homes · Berkshire Hathaway HomeServices Nevada Properties</p>
+                            <p>Mountain Edge Homes · Dr. Jan Duffy, REALTOR®</p>
                         </div>
                     </div>
                     
