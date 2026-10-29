@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             {
                 "@type": "Question",
-                "name": "What are the best schools near Mountain's Edge Las Vegas?",
+                "name": "What are the public schools near Mountain's Edge Las Vegas?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Mountain's Edge is served by several highly-rated schools including Wright Elementary School, Faiss Middle School, and Sierra Vista High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy."
+                    "text": "Mountain's Edge is served by several nearby public schools including Wright Elementary School, Faiss Middle School, and Sierra Vista High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy."
                 }
             }
         ]
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             question: "Which schools serve the Mountain's Edge community?",
-            answer: "Mountain's Edge is served by several highly-rated schools in the Clark County School District including Wright Elementary School, Carolyn S. Reedom Elementary, Judith D. Steele Elementary, Lawrence & Heidi Canarelli Middle School, Faiss Middle School, Sierra Vista High School, and Desert Oasis High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy."
+            answer: "Mountain's Edge is served by several public schools in the Clark County School District including Wright Elementary School, Carolyn S. Reedom Elementary, Judith D. Steele Elementary, Lawrence & Heidi Canarelli Middle School, Faiss Middle School, Sierra Vista High School, and Desert Oasis High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy."
         },
         {
             question: "What amenities are available in Mountain's Edge Las Vegas?",
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
             answer: "Mountain's Edge experiences the desert climate typical of Las Vegas with some modifications due to its slightly higher elevation. Summers (June-September) are hot with temperatures frequently exceeding 100°F with low humidity. Winters (December-February) are mild with daytime temperatures averaging 55-65°F and nights occasionally dropping to the 30s. Spring and Fall are pleasant with temperatures ranging from 65-85°F. The area receives very low precipitation (approximately 4 inches annually) and enjoys over 300 sunny days per year."
         },
         {
-            question: "Is Mountain's Edge a safe neighborhood?",
-            answer: "Mountain's Edge is considered one of the safer neighborhoods in the Las Vegas area. The community features several gated sections, active neighborhood watch programs, and regular patrols. Crime rates are lower than Las Vegas averages, and the well-planned community design contributes to its safety profile. Additionally, the Las Vegas Metropolitan Police Department has a substation relatively close to the community, ensuring quick response times when needed."
+            question: "Is Mountain's Edge a neighborhood?",
+            answer: "Mountain's Edge has several gated sections, neighborhood watch programs, and regular patrols. LVMPD publishes crime data online at opendata-lvmpd.hub.arcgis.com, so you can check any address yourself. The Las Vegas Metropolitan Police Department has a substation relatively close to the community, ensuring quick response times when needed."
         },
         {
             question: "What healthcare facilities are near Mountain's Edge?",
