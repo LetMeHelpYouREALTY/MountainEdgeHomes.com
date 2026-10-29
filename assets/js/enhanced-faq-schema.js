@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Neighborhood FAQs
         {
             question: "Which neighborhoods are part of Mountain's Edge in Las Vegas?",
-            answer: "Mountain's Edge includes eight distinctive neighborhoods: Aspire, Cascade at Mountain Pass, Collina, Mesa/Valla, Montelano, Quintessa, San Gabriel, and Sierra Madre. Each offers unique home styles and community amenities. Aspire features exclusive gated homes, Cascade at Mountain Pass offers guard-gated luxury living with mountain views, Collina provides stunning homes in picturesque settings, Mesa/Valla focuses on family-friendly designs, Montelano offers spacious lots, Quintessa emphasizes architectural distinction, San Gabriel provides diverse home styles, and Sierra Madre features prestigious homes with resort-style amenities.",
+            answer: "Mountain's Edge includes eight distinctive neighborhoods: Aspire, Cascade at Mountain Pass, Collina, Mesa/Valla, Montelano, Quintessa, San Gabriel, and Sierra Madre. Each offers unique home styles and community amenities. Aspire features exclusive gated homes, Cascade at Mountain Pass offers guard-gated luxury living with mountain views, Collina provides stunning homes in picturesque settings, Mesa/Valla focuses on designs, Montelano offers spacious lots, Quintessa emphasizes architectural distinction, San Gabriel provides diverse home styles, and Sierra Madre features prestigious homes with resort-style amenities.",
             categories: ["neighborhood"]
         },
         {
             question: "What is it like living in Mountain's Edge Las Vegas?",
-            answer: "Living in Mountain's Edge offers a suburban desert lifestyle with an emphasis on outdoor recreation, family-friendly amenities, and a strong sense of community, all within a 20-minute drive to the Las Vegas Strip. Residents enjoy hiking trails, parks, and open spaces designed for year-round outdoor activities. The community hosts regular neighborhood gatherings, holiday celebrations, and seasonal festivals that create strong social bonds. With excellent schools, numerous playgrounds, and youth programs, it's particularly appealing to families. The area strikes an ideal balance between suburban tranquility and easy access to Las Vegas entertainment and employment centers.",
+            answer: "Living in Mountain's Edge offers a suburban desert lifestyle with an emphasis on outdoor recreation, community amenities, and a strong sense of community, all within a 20-minute drive to the Las Vegas Strip. Residents enjoy hiking trails, parks, and open spaces designed for year-round outdoor activities. The community hosts regular neighborhood gatherings, holiday celebrations, and seasonal festivals that create strong social bonds. With nearby public schools, numerous playgrounds, and youth programs, it's particularly appealing to families. The area strikes an ideal balance between suburban tranquility and easy access to Las Vegas entertainment and employment centers.",
             categories: ["neighborhood", "lifestyle"]
         },
         {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Schools FAQs
         {
             question: "Which schools serve the Mountain's Edge community?",
-            answer: "Mountain's Edge is served by several highly-rated schools in the Clark County School District including Wright Elementary School, Carolyn S. Reedom Elementary, Judith D. Steele Elementary, Lawrence & Heidi Canarelli Middle School, Faiss Middle School, Sierra Vista High School, and Desert Oasis High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy. For the most current school assignment information, families should verify with the Clark County School District or contact our office for assistance.",
+            answer: "Mountain's Edge is served by several public schools in the Clark County School District including Wright Elementary School, Carolyn S. Reedom Elementary, Judith D. Steele Elementary, Lawrence & Heidi Canarelli Middle School, Faiss Middle School, Sierra Vista High School, and Desert Oasis High School. There are also several private and charter school options nearby including Pinecrest Academy and American Preparatory Academy. For the most current school assignment information, families should verify with the Clark County School District or contact our office for assistance.",
             categories: ["schools", "neighborhood"]
         },
         {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             question: "What is the rental market like in Mountain's Edge?",
-            answer: "The Mountain's Edge rental market is strong with high demand, average monthly rents of $2,500-$4,500 for single-family homes, typical cash flow returns of 4-6%, low vacancy rates (under 5%), and stable tenancy averaging 2+ years. The neighborhood attracts quality tenants including professionals, families with children, and military personnel. Properties in gated communities command 10-15% higher rents but have increased HOA fees. Rental restrictions vary by neighborhood - some limit the percentage of rental properties allowed, so investors should verify these details before purchasing.",
+            answer: "The Mountain's Edge rental market is strong with high demand, average monthly rents of $2,500-$4,500 for single-family homes, typical cash flow returns of 4-6%, low vacancy rates (under 5%), and stable tenancy averaging 2+ years. The neighborhood draws long-term renters, including military personnel stationed nearby. Properties in gated communities command 10-15% higher rents but have increased HOA fees. Rental restrictions vary by neighborhood - some limit the percentage of rental properties allowed, so investors should verify these details before purchasing.",
             categories: ["investment"]
         },
         
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
             categories: ["lifestyle", "neighborhood"]
         },
         {
-            question: "Is Mountain's Edge a safe neighborhood?",
-            answer: "Mountain's Edge is considered one of the safer neighborhoods in the Las Vegas area. The community features several gated sections, active neighborhood watch programs, and regular patrols. Crime rates are lower than Las Vegas averages, and the well-planned community design contributes to its safety profile. Additionally, the Las Vegas Metropolitan Police Department has a substation relatively close to the community, ensuring quick response times when needed. The strong sense of community and high percentage of owner-occupied homes creates natural neighborhood vigilance.",
+            question: "Is Mountain's Edge a neighborhood?",
+            answer: "Mountain's Edge has several gated sections, neighborhood watch programs, and regular patrols. LVMPD publishes crime data online at opendata-lvmpd.hub.arcgis.com, so you can check any address yourself. The Las Vegas Metropolitan Police Department has a substation relatively close to the community, ensuring quick response times when needed. The strong sense of community and high percentage of owner-occupied homes creates natural neighborhood vigilance.",
             categories: ["lifestyle", "neighborhood"]
         },
         {
