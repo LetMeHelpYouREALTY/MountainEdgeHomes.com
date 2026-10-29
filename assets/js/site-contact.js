@@ -17,7 +17,7 @@ window.MountainEdgeSiteContact = {
   mapsSearchUrl:
     'https://www.google.com/maps/search/?api=1&query=8015+Blue+Diamond+Rd+Las+Vegas+NV+89178',
   /** Review entry point used on index; confirm in Google Business Profile. */
-  googleReviewUrl: 'https://g.page/r/Mountains-Edge-Homes/review',
+  googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ7XLw8ta5yIARjTZPjgHJWVQ',
   openingHoursNote:
     'Mon–Fri 9am–6pm, Sat 10am–4pm; Sunday by appointment (omit from schema unless GBP lists Sunday hours).',
 };
