@@ -109,11 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             "telephone": "(702) 919-5002",
             "url": "https://mountainedgehomes.com",
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "87"
-            },
             "review": [
                 {
                     "@type": "Review",
