@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.property-image img')?.src || 
             document.querySelector('.neighborhood-image img')?.src ||
             document.querySelector('main img')?.src ||
-            'https://mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg';
+            'https://www.mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg';
         
         // Ensure full URL for image
         if (mainImage && !mainImage.startsWith('http')) {

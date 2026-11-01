@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "@context": "https://schema.org",
             "@type": "RealEstateAgent",
             "name": "Mountain Edge Homes",
-            "image": "https://mountainedgehomes.com/assets/images/logo.jpg",
+            "image": "https://www.mountainedgehomes.com/assets/images/logo.jpg",
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "8015 Blue Diamond Rd",
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "addressCountry": "US"
             },
             "telephone": "(702) 919-5002",
-            "url": "https://mountainedgehomes.com",
+            "url": "https://www.mountainedgehomes.com",
             "review": [
                 {
                     "@type": "Review",

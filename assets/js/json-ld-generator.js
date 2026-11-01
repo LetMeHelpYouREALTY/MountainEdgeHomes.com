@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: document.title || 'Mountain Edge Homes',
             description: document.querySelector('meta[name="description"]')?.content || 'Luxury Real Estate in Mountain\'s Edge Las Vegas',
             url: window.location.href,
-            image: document.querySelector('meta[property="og:image"]')?.content || 'https://mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg'
+            image: document.querySelector('meta[property="og:image"]')?.content || 'https://www.mountainedgehomes.com/assets/images/hero-mountains-edge-1600w.jpg'
         };
         
         // Get additional data based on page type
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         "seller": {
                             "@type": "RealEstateAgent",
                             "name": "Mountain Edge Homes",
-                            "url": "https://mountainedgehomes.com"
+                            "url": "https://www.mountainedgehomes.com"
                         }
                     },
                     "additionalProperty": [
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             "name": "Mountain Edge Homes",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://mountainedgehomes.com/assets/images/favicon.png"
+                                "url": "https://www.mountainedgehomes.com/assets/images/favicon.png"
                             }
                         },
                         "blogPost": Array.from(blogArticles).slice(0, 5).map(article => {
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             "name": "Mountain Edge Homes",
                             "logo": {
                                 "@type": "ImageObject",
-                                "url": "https://mountainedgehomes.com/assets/images/favicon.png"
+                                "url": "https://www.mountainedgehomes.com/assets/images/favicon.png"
                             }
                         },
                         "mainEntityOfPage": {
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         "name": "Mountain Edge Homes",
                         "logo": {
                             "@type": "ImageObject",
-                            "url": "https://mountainedgehomes.com/assets/images/favicon.png"
+                            "url": "https://www.mountainedgehomes.com/assets/images/favicon.png"
                         }
                     }
                 };

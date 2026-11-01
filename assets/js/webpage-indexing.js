@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get page metadata
     const pageTitle = document.title;
     const pageDescription = document.querySelector('meta[name="description"]')?.content || '';
-    const canonicalOrigin = 'https://mountainedgehomes.com';
+    const canonicalOrigin = 'https://www.mountainedgehomes.com';
     const normalizedPath = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
     const pageUrl = canonicalOrigin + (normalizedPath === '/' ? '' : normalizedPath) + (window.location.search || '');
     const lastModified = document.querySelector('meta[name="last-modified"]')?.content || new Date().toISOString().split('T')[0];
@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         "name": pageTitle,
         "description": pageDescription,
         "url": pageUrl,
-        "publisher": { "@id": "https://mountainedgehomes.com/#organization" },
+        "publisher": { "@id": "https://www.mountainedgehomes.com/#organization" },
         "lastReviewed": lastModified,
-        "reviewedBy": { "@id": "https://mountainedgehomes.com/#organization" },
+        "reviewedBy": { "@id": "https://www.mountainedgehomes.com/#organization" },
         "mainContentOfPage": {
             "@type": "WebPageElement",
             "cssSelector": ".hero-content, main, .properties-section, .about-section"

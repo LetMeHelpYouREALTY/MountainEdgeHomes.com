@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://mountainedgehomes.com/"
+                "item": "https://www.mountainedgehomes.com/"
             }
         ];
         
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     "@type": "ListItem",
                     "position": index + 2,
                     "name": segmentName,
-                    "item": `https://mountainedgehomes.com/${segment}`
+                    "item": `https://www.mountainedgehomes.com/${segment}`
                 });
             });
         }

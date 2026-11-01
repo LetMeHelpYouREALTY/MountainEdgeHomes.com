@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             priceCurrency: 'USD',
             url: window.location.href,
             image: document.querySelector('.property-image img')?.src || 
-                 'https://mountainedgehomes.com/assets/images/property-placeholder.jpg',
+                 'https://www.mountainedgehomes.com/assets/images/property-placeholder.jpg',
             address: document.querySelector('.property-address')?.textContent.trim() || 
                    'Mountain\'s Edge, Las Vegas, NV 89178',
             numberOfBedrooms: document.querySelector('.property-beds')?.textContent.trim().split(' ')[0] || '4',
@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
             "broker": {
                 "@type": "RealEstateAgent",
                 "name": "Mountain Edge Homes",
-                "image": "https://mountainedgehomes.com/assets/images/favicon.png",
-                "url": "https://mountainedgehomes.com",
+                "image": "https://www.mountainedgehomes.com/assets/images/favicon.png",
+                "url": "https://www.mountainedgehomes.com",
                 "telephone": "(702) 919-5002",
                 "email": "DrJanSells@MountainEdgeHomes.com",
                 "address": {

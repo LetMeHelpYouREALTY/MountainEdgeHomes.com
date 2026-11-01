@@ -3,7 +3,7 @@
  * Update here when Google Business Profile office details change; then sync footers and schema.
  */
 window.MountainEdgeSiteContact = {
-  siteOrigin: 'https://mountainedgehomes.com',
+  siteOrigin: 'https://www.mountainedgehomes.com',
   businessName: 'Mountain Edge Homes',
   telephoneDisplay: '(702) 919-5002',
   telephoneE164: '+17029195002',

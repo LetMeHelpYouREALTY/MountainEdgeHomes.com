@@ -1,13 +1,13 @@
-# robots.txt for https://mountainedgehomes.com/
-# Google Search Console: add URL-prefix property https://mountainedgehomes.com/ and submit
-# https://mountainedgehomes.com/sitemap.xml (see GSC-SETUP.md). Do not block /assets/.
+# robots.txt for https://www.mountainedgehomes.com/
+# Google Search Console: add URL-prefix property https://www.mountainedgehomes.com/ and submit
+# https://www.mountainedgehomes.com/sitemap.xml (see GSC-SETUP.md). Do not block /assets/.
 
 # Allow all user agents
 User-agent: *
 Allow: /
 
 # Sitemap (single source; add image/video sitemaps here only after those files exist on the host)
-Sitemap: https://mountainedgehomes.com/sitemap.xml
+Sitemap: https://www.mountainedgehomes.com/sitemap.xml
 
 # Block sensitive directories (do not block JS/CSS needed for rendering — GSC may report blocked resources)
 Disallow: /attached_assets/
